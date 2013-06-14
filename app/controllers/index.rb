@@ -6,7 +6,8 @@ end
 #----------- SESSIONS -----------
 
 get '/sessions/new' do
-  # render sign-in page 
+  # render sign-in page
+  @errors = session.delete(:errors) if session[:errors] 
   erb :sign_in
 end
 
