@@ -1,3 +1,11 @@
 class User < ActiveRecord::Base
-  #TODO : Use bcrypt to store hashed passwords and authenticate users
+
+  has_secure_password
+
+  validates :name, :presence => true
+  validates :email, :presence => true,
+                    :uniqueness => true
+  validates :password, :presence => true,
+                       :length => {:minimum => 5, :maximum => 40}
+
 end
