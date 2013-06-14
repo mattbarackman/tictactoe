@@ -1,8 +1,12 @@
 <div class="container">
   <h1>Sign In</h1>
 
-  <% if @error %>
-    <div class="errors"><%= @error %></div>
+  <% if @errors %>
+      <div class="errors">
+        <% @errors.each do |key, value| %>
+          <p><%= "#{key} #{value}" %></p>
+        <% end %>
+      </div>
   <% end %>
 
   <form id="sign-in" method="post" action="/sessions">
