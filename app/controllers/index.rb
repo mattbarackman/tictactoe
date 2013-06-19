@@ -7,7 +7,7 @@ end
 
 get '/sessions/new' do
   # render sign-in page
-  p @errors = errors 
+  @errors = errors 
   erb :sign_in
 end
 
@@ -46,11 +46,7 @@ post '/users' do
     redirect '/'
   else
     session[:errors] = user.errors
-    # p params[:user].methods.sort - Object.methods
-    # p params[:user].to_hash
-    # session[:form_data] = params[:user].to_hash
     session[:form_data] = convert_for_session(params[:user])
-    # session[:form_data]
     redirect '/users/new'
   end
 end
