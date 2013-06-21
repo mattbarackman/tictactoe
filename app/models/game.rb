@@ -3,11 +3,8 @@ class Game < ActiveRecord::Base
   # Remember to create a migration!
 
   WINNING_BLOCKS = ["123", "456", "789", "147", "258", "369", "159", "357"]
-  def continue?
-    determine_winner! == "continue"
-  end
 
-  def determine_winner!
+  def find_winner
     game_string = self.moves
     game_moves = game_string.split('')
     p1 = []
@@ -24,18 +21,26 @@ class Game < ActiveRecord::Base
         return winner.name
       end
     end
-
-    if game_string.length == 9 
-      self.winner = nil
-      "draw"
-    else
-      "continue"
-    end
+    false
   end
 
-  private
-
-  def declare_winner!(player)
-    self.winner = player
+  def continue?
+    !(game.find_winner || game_string == 9)
   end
+
+  def state
+    {:continue => self.continue?,
+    :outcome => self.find_winner || "draw", 
+    :cells => self.cells, #     ["","","O","","X","","O","","X"]
+    :current_turn => current_turn} # either integer 1 or 2
+  end
+
+
+  def cells
+    # self.moves.each do |
+
+    # "5793"
+    ["","","O","","X","","O","","X"]
+  end
+
 end

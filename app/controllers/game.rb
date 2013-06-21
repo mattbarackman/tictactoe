@@ -15,18 +15,23 @@ get '/game/:game_id' do
   erb :board
 end
 
-post '/move' do
+post '/:game_id/move' do
 
-  game_id = params[:game_id]
   cell = params[:cell_id]
-  
+  game = Game.find(game_id)
+  game.moves += cell
+  game.save
+  200  
 
 end
 
 get '/game/:game_id/state' do
   content_type :json
 
-    game = Game.find(params[:game_id])
+  if game.continue?
+    
+
+  game = Game.find(params[:game_id])
   
   game_state = { 
     :continue => continue?(game.moves),
