@@ -7,4 +7,15 @@ $(document).ready(function () {
     request.done(function () { window.location = "/"; });
   });
 
+
+  $.get(url: '/')
+  values = ["X","","","","X","O","","",""];
+
+  for (var i = 0; i<9; i++){
+    $('.cell:nth-child(' + i+1 + ')').text(values[i]);
+  }
+
 });
+
+
+

@@ -3,6 +3,7 @@
 <head>
   <link rel="stylesheet" href="/css/normalize.css">
   <link rel="stylesheet" href="/css/application.css">
+  <link rel="stylesheet" href="/css/board.css">
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="/js/application.js"></script>
@@ -17,6 +18,7 @@
 
     <ul>
       <% if current_user %>
+      <li><a id="new-game" href="/games/new">New Game!</a></li>
         <li><a id="sign-out" href="/sessions/<%= current_user.id %>" method="delete">Sign Out</a></li>
       <% else %>
         <li><a href="/sessions/new">Sign In</a></li>
@@ -25,7 +27,8 @@
     </ul>
 
   </nav>
-
-  <%= yield %>
+  <div class="container">
+    <%= yield %>
+  </div>
 </body>
 </html>

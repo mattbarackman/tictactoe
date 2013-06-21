@@ -1,0 +1,29 @@
+#board {
+  width: 800px;
+  height: 800px;
+  margin-top: 20px;
+}
+
+.cell {
+  box-sizing: border-box;
+  width: 33%;
+  height: 33%;
+  border: 1px solid black;
+  float: left;
+  font-size: 8em;
+  text-align: center;
+  padding: 60px;
+  transition-property: background-color;
+  transition-duration: 500ms;
+}
+
+.cell:hover{
+  background-color: lightblue;
+}
+
+/*.cell:nth-child(2) {
+  background-color: red;
+}
+*/
+
+$(.cell:nth-child(2)).text("X")

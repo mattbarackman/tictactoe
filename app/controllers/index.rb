@@ -1,6 +1,9 @@
 get '/' do
- @users = User.all
-  erb :index
+  if current_user
+    redirect '/lobby'
+  else
+    erb :index
+  end
 end
 
 #----------- SESSIONS -----------
@@ -51,6 +54,3 @@ post '/users' do
   end
 end
 
-post '/move' do
-  
-end

@@ -1,0 +1,3 @@
+<% @games.each_with_index do |game, index| %>
+  <a href="/game/<%= game.id %>">Game <%= index+1 %></a>
+<% end %>
