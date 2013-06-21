@@ -20,7 +20,7 @@ post '/move' do
 end
 
 get '/game/:game_id/state' do
-
+  content_type :json
 
 
 end

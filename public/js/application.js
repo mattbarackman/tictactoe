@@ -8,12 +8,15 @@ $(document).ready(function () {
   });
 
 
-  $.get(url: '/')
-  values = ["X","","","","X","O","","",""];
-
-  for (var i = 0; i<9; i++){
+  $.get(url: window.location.pathname + '/state').done(function(values){
+    for (var i = 0; i<9; i++){
     $('.cell:nth-child(' + i+1 + ')').text(values[i]);
   }
+
+  });
+  values = {status:"player1",cells:["X","","","","X","O","","",""]};
+
+  
 
 });
 
