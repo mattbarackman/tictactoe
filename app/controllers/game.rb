@@ -11,17 +11,20 @@ get '/games/new' do
 end
 
 get '/game/:game_id' do
-  
+
   erb :board
 end
 
 post '/move' do
+
+  game_id = params[:game_id]
+  cell = params[:cell_id]
   
+
 end
 
 get '/game/:game_id/state' do
   content_type :json
-
 
 end
 

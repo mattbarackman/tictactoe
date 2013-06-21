@@ -1,14 +1,12 @@
-class Game < ActiveRecord::Base
-
-  # Remember to create a migration!
+helpers do
+  #string represents a sequence of moves: "582196734"
 
   WINNING_BLOCKS = ["123", "456", "789", "147", "258", "369", "159", "357"]
-  def continue?
-    determine_winner! == "continue"
+  def continue?(game_string)
+    winner(game_string) == "continue"
   end
 
-  def determine_winner!
-    game_string = self.moves
+  def winner(game_string)
     game_moves = game_string.split('')
     p1 = []
     game_moves.each_index { |x| p1 << game_string[x] if x % 2 == 0 }
@@ -17,25 +15,18 @@ class Game < ActiveRecord::Base
     WINNING_BLOCKS.each do |block|
       block_array = block.split('')
       if block_array.reduce(true) { |result, next_item| result && p1.include?(next_item) }
-        declare_winner!(player1)
-        return winner.name
+        return "player1"
       elsif block_array.reduce(true) { |result, next_item| result && p2.include?(next_item) }
-        declare_winner!(player2)
-        return winner.name
+        return "player2"
       end
     end
 
-    if game_string.length == 9 
-      self.winner = nil
-      "draw"
-    else
-      "continue"
-    end
+    game_string.length == 9 ? "draw" : "continue"
+
   end
 
-  private
-
-  def declare_winner!(player)
-    self.winner = player
-  end
 end
+# puts winner("518273") == "player2"
+# puts winner("956378214") == "draw"
+# puts winner("51827") == "continue"
+# puts winner("") == "continue"
