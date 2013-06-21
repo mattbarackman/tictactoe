@@ -26,6 +26,18 @@ end
 get '/game/:game_id/state' do
   content_type :json
 
+    game = Game.find(params[:game_id])
+  
+  game_state = { 
+    :continue => continue?(game.moves),
+    :winner => winner(game.moves),
+    :cells => game.board,
+    :current_turn => game.current_turn
+  }
+
+  game_state.to_json
+
+
 end
 
 
