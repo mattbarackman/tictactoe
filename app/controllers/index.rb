@@ -50,3 +50,7 @@ post '/users' do
     redirect '/users/new'
   end
 end
+
+post '/move' do
+  
+end

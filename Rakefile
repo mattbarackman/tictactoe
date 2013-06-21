@@ -116,6 +116,11 @@ namespace :db do
   task :version do
     puts "Current version: #{ActiveRecord::Migrator.current_version}"
   end
+
+  desc "Reload everything"
+  task :reload do
+   system('rake db:drop; rake db:create; rake db:migrate; rake db:seed; shotgun')
+  end
 end
 
 desc 'Start IRB with application environment loaded'
