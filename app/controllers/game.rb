@@ -33,5 +33,8 @@ end
 get '/game/:game_id/state' do |game_id|
   content_type :json
   game = Game.find(game_id)
+
+  p "game state"
+  p game.state
   game.state.to_json
 end

@@ -21,14 +21,17 @@ $(document).ready(function () {
 
 
 
-var checkStatus = setInterval(function(){   
-  $.get({ url: gameURL + '/state' }).done(function(values){
+var checkStatus = setInterval(function(){ 
+  console.log("Im running");  
+  $.ajax({ url: gameURL + "/state", method: 'get' }).done(function(values){
+  // $.get({ url: gameURL + '/state' }).done(function(values){
+    console.log(values);
     var cont = values['continue'];
     var winner = values['winner'];
     var cells = values['cells'];
     var current_turn = ['current_turn'];
 
-    if (cont === 'true') {
+    if (cont === true) {
 
       // update the board
       for (var i = 0; i<9; i++){
@@ -44,8 +47,7 @@ var checkStatus = setInterval(function(){
 
   });
   }, 1000);
-  
-
+   
 });
 
 
