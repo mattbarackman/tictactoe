@@ -11,21 +11,33 @@ class Game < ActiveRecord::Base
     game_moves.each_index { |x| p1 << game_string[x] if x % 2 == 0 }
     p2 = game_moves - p1
 
+    user_one = User.find(self.player1)
+    user_two = User.find(self.player2)
+
     WINNING_BLOCKS.each do |block|
       block_array = block.split('')
       if block_array.reduce(true) { |result, next_item| result && p1.include?(next_item) }
-        declare_winner!(player1)
-        return winner.name
+        declare_winner!(user_one)
+        return user_one.name
       elsif block_array.reduce(true) { |result, next_item| result && p2.include?(next_item) }
-        declare_winner!(player2)
-        return winner.name
+        declare_winner!(user_two)
+        return user_two.name
       end
     end
     false
   end
 
   def continue?
-    !(game.find_winner || game_string == 9)
+    !(self.find_winner || self.moves.length == 9)
+  end
+
+  def declare_winner!(winner)
+    winner.wins << self
+    winner.save
+  end
+
+  def current_turn
+    self.moves.length % 2 + 1
   end
 
   def state
@@ -37,10 +49,15 @@ class Game < ActiveRecord::Base
 
 
   def cells
-    # self.moves.each do |
-
-    # "5793"
-    ["","","O","","X","","O","","X"]
+    cell_grid = [""] * 9
+    player = "X"
+    self.moves.split('').each do |position|
+      cell_grid[position.to_i - 1] = player
+      player = (player == "X" ? "O" : "X")
+    end
+    cell_grid
   end
 
 end
+
+

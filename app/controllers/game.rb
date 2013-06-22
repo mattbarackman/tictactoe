@@ -11,38 +11,22 @@ get '/games/new' do
 end
 
 get '/game/:game_id' do
-
   erb :board
 end
 
 post '/:game_id/move' do
-
   cell = params[:cell_id]
   game = Game.find(game_id)
   game.moves += cell
   game.save
   200  
-
 end
 
-get '/game/:game_id/state' do
+get '/game/:game_id/state' do |game_id|
   content_type :json
 
-  if game.continue?
-    
-
-  game = Game.find(params[:game_id])
+  game = Game.find(game_id)
   
-  game_state = { 
-    :continue => continue?(game.moves),
-    :winner => winner(game.moves),
-    :cells => game.board,
-    :current_turn => game.current_turn
-  }
-
-  game_state.to_json
-
+  game.state.to_json
 
 end
-
-
