@@ -25,7 +25,7 @@ post '/game/:game_id/move' do
   p cell
   game = Game.find(params[:game_id])
   p game
-  game.moves += cell
+  game.moves += cell unless game.moves.split("").include? cell
   game.save
   200  
 end
@@ -33,8 +33,10 @@ end
 get '/game/:game_id/state' do |game_id|
   content_type :json
   game = Game.find(game_id)
-
-  p "game state"
-  p game.state
-  game.state.to_json
+  if game.player2
+    game.state 
+    game.state.to_json
+  else
+    200
+  end
 end

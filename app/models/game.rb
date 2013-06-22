@@ -13,6 +13,7 @@ class Game < ActiveRecord::Base
 
     user_one = User.find(self.player1)
     user_two = User.find(self.player2)
+    
 
     WINNING_BLOCKS.each do |block|
       block_array = block.split('')
@@ -28,6 +29,7 @@ class Game < ActiveRecord::Base
   end
 
   def continue?
+    p self.find_winner
     !(self.find_winner || self.moves.length == 9)
   end
 
@@ -41,6 +43,7 @@ class Game < ActiveRecord::Base
   end
 
   def state
+
     {:continue => self.continue?,
     :outcome => self.find_winner || "draw", 
     :cells => self.cells, #     ["","","O","","X","","O","","X"]

@@ -15,31 +15,42 @@ $(document).ready(function () {
 
 
 var checkStatus = setInterval(function(){ 
-  console.log("Im running");  
   $.ajax({ url: gameURL + "/state", method: 'get' }).done(function(values){
   // $.get({ url: gameURL + '/state' }).done(function(values){
+
     console.log(values);
     var cont = values['continue'];
-    var winner = values['winner'];
+    var winner = values['outcome'];
+    console.log(winner);
+
     var cells = values['cells'];
+    console.log(cells);
     var current_turn = ['current_turn'];
 
     if (cont === true) {
 
       // update the board
       for (var i = 0; i<9; i++){
-        $('.cell:nth-child(' + i+1 + ')').text(cells[i]);
+        var index = i+1
+        $('.cell:nth-child(' + index + ')').text(cells[i]);
       }
 
 
-    } else
+    } else {
+      for (var i = 0; i<9; i++){
+        var index = i+1
+        $('.cell:nth-child(' + index + ')').text(cells[i]);
+      }
+
+      $('#outcome').text('The winner is: ' + winner);
         // announce winner, lock game, clear interval
 
         clearInterval(checkStatus);
-
+      }
 
   });
   }, 1000);
+  
    
 });
 
