@@ -1,3 +1,24 @@
-<% @games.each_with_index do |game, index| %>
-  <a href="/game/<%= game.id %>">Game <%= index+1 %></a>
+<h1> Games in Progress </h1>
+
+<h4> Games To Join: </h4>
+<ul>
+<% @games_to_join.each_with_index do |game, index| %>
+  <li><a href="/game/<%= game.id %>">Game <%= index+1 %></a></li>
 <% end %>
+</ul>
+<h4> Games You've Started: </h4>
+<ul>
+<% @games_started.each do |game| %>
+  <li><a href="/game/<%= game.id %>">Game <%= game.id %></a></li>
+<% end %>
+</ul>
+
+
+
+<h1> Your Stats: </h1>
+<ul>
+  <li>Wins:<%= @user_stats[:wins] %></li>
+  <li>Losses:<%= @user_stats[:losses] %></li>
+  <li>Draws:<%= @user_stats[:draws] %></li>
+  <li>Incomplete:<%= @user_stats[:incomplete] %></li>
+</ul>

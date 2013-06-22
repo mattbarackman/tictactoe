@@ -4,7 +4,7 @@ class CreateGames < ActiveRecord::Migration
       t.integer :player1
       t.integer :player2
       t.integer :winner
-      t.string  :moves
+      t.string  :moves, default: ""
       t.timestamps
     end
   end
