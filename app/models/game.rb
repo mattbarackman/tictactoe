@@ -47,7 +47,8 @@ class Game < ActiveRecord::Base
     {:continue => self.continue?,
     :outcome => self.find_winner || "draw", 
     :cells => self.cells, #     ["","","O","","X","","O","","X"]
-    :current_turn => current_turn} # either integer 1 or 2
+    :current_turn => current_turn,
+    :current => 1} # either integer 1 or 2
   end
 
 
