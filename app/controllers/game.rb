@@ -19,9 +19,12 @@ get '/game/:game_id' do |game_id|
   erb :board
 end
 
-post '/:game_id/move' do
+post '/game/:game_id/move' do
+  p params
   cell = params[:cell_id]
-  game = Game.find(game_id)
+  p cell
+  game = Game.find(params[:game_id])
+  p game
   game.moves += cell
   game.save
   200  
